@@ -1,5 +1,5 @@
 import { createCurrentUserHook, createClient } from 'next-sanity';
-import imageUrlBuilder from './mediumclone/node_modules/@sanity/image-url';
+import imageUrlBuilder from '@sanity/image-url';
 // import imageUrlBuilder from '@sanity/image-url';
 import sanityClient from '@sanity/client';
 
