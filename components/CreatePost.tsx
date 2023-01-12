@@ -25,7 +25,7 @@ const CreatePost = ({ authors }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<PostForm>();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [imagesAssets, setImagesAssets] = useState<any>();
   const [imageTarget, setImageTarget] = useState<any>();
   const [profileError, setProfileError] = useState(false);
@@ -54,6 +54,7 @@ const CreatePost = ({ authors }: Props) => {
   };
 
   const onSubmit: SubmitHandler<PostForm> = async (data) => {
+    setIsLoading(true);
     if (imagesAssets) {
       setProfileError(false);
       const formData = new FormData();
@@ -94,6 +95,7 @@ const CreatePost = ({ authors }: Props) => {
     } else {
       setProfileError(true);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -225,7 +227,7 @@ const CreatePost = ({ authors }: Props) => {
 
           <input
             type="submit"
-            value="Share Post"
+            value={`${isLoading ? 'Loading...' : 'Share Post'}`}
             className="bg-yellow-500 text-white font-bold w-full mx-auto py-2 px-3 rounded cursor-pointer hover:bg-yellow-400 focus:shadow  focus:outline-none transition-colors duration-200 ease-in-out"
           />
         </form>

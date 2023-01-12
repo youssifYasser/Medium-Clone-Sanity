@@ -1,6 +1,5 @@
 import { urlFor } from '../sanity';
 import { Post } from '../typings';
-import PortableText from 'react-portable-text';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 
