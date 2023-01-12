@@ -14,6 +14,9 @@ export const authOptions = {
       return session; // The return type will match the one returned in `useSession()`
     },
   },
+  pages: {
+    signIn: '/sign-in',
+  },
 };
 
 export default NextAuth(authOptions);

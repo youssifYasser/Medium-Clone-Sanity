@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Banner from '../components/Banner';
-import Header from '../components/Header';
 import Posts from '../components/Posts';
 import { client } from '../sanity';
 import { Post } from '../typings';

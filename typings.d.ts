@@ -13,6 +13,11 @@ declare module 'next-auth' {
   }
 }
 
+export interface Provider {
+  id: string;
+  name: string;
+}
+
 export interface Post {
   _id: string;
   _createdAt: string;

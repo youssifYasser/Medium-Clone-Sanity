@@ -4,7 +4,6 @@ import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import Image from 'next/image';
 import {
-  ArrowLeftOnRectangleIcon,
   ArrowRightOnRectangleIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
@@ -39,16 +38,11 @@ const Header = () => {
             </h3>
           </Link>
         ) : (
-          //   <Link href="/create-post">
-
-          <h3
-            onClick={() => signIn()}
-            className="text-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold"
-          >
-            Sign in
-          </h3>
-
-          // </Link>
+          <Link href="/sign-in">
+            <h3 className="text-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+              Sign in
+            </h3>
+          </Link>
         )}
 
         <Menu as="div" className="relative inline-block text-left">

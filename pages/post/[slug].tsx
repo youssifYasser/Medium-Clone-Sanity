@@ -53,8 +53,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const post = await client.fetch(query, { slug: params?.slug });
 
-  console.log(post);
-
   if (!post) {
     return {
       notFound: true,
