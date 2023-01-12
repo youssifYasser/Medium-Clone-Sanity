@@ -1,9 +1,16 @@
 import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/react';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { Menu, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
+import Image from 'next/image';
+import {
+  ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
+  UserIcon,
+} from '@heroicons/react/24/outline';
 
 const Header = () => {
   const { data: session } = useSession();
-  console.log(session?.user);
 
   return (
     <header className="flex justify-between p-5 max-w-7xl mx-auto">
@@ -25,19 +32,109 @@ const Header = () => {
       </div>
 
       <div className="flex flex-1 justify-end items-center space-x-2 sm:space-x-5 text-green-600">
-        <Link href="/create-post">
-          <h3 className="cursor-pointer text-sm sm:text-base">Create Post</h3>
-        </Link>
-        {/* <Link href="/sign-up"> */}
-        <h3
-          onClick={() => signIn()}
-          className="border-2 border-green-600 text-sm sm:text-base rounded-full px-3 py-1 cursor-pointer"
-        >
-          Sign in
-        </h3>
-        {/* </Link> */}
+        {session ? (
+          <Link href="/create-post">
+            <h3 className="ext-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+              Create Post
+            </h3>
+          </Link>
+        ) : (
+          //   <Link href="/create-post">
+
+          <h3
+            onClick={() => signIn()}
+            className="text-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold"
+          >
+            Sign in
+          </h3>
+
+          // </Link>
+        )}
+
+        <Menu as="div" className="relative inline-block text-left">
+          <div>
+            <Menu.Button
+              className={`flex rounded-full ${
+                session
+                  ? 'cursor-pointer active:scale-95 filter active:brightness-75 transition-all duration-150'
+                  : 'cursor-default'
+              }`}
+            >
+              {session?.user ? (
+                <Image
+                  alt="profile-pic"
+                  width="40"
+                  height="40"
+                  src={session.user.image}
+                  className="rounded-full"
+                />
+              ) : (
+                <div className="bg-gray-300 text-gray-900 p-2 rounded-full">
+                  <UserIcon className="h-6" />
+                </div>
+              )}
+            </Menu.Button>
+          </div>
+          {session && (
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 z-15 mt-2 w-56 origin-top-right rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="border-b border-gray-200">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <div
+                        className={`${
+                          active && 'bg-gray-100 rounded-t-lg text-gray-900'
+                        } flex items-center space-x-3 p-2 cursor-default`}
+                      >
+                        <Image
+                          alt="profile-pic"
+                          width="40"
+                          height="40"
+                          src={session.user?.image}
+                          className="rounded-full"
+                        />
+                        <p className="whitespace-nowrap font-semibold lg:text-base">
+                          {session.user?.name}
+                        </p>
+                      </div>
+                    )}
+                  </Menu.Item>
+                </div>
+
+                <Menu.Item>
+                  {({ active }) => (
+                    <div
+                      className={`${
+                        active && 'bg-gray-100 rounded-b-lg'
+                      } text-gray-900 flex items-center space-x-3 p-2 cursor-pointer`}
+                      onClick={() => signOut()}
+                    >
+                      <div
+                        className={`${
+                          active ? 'bg-gray-300' : 'bg-gray-200'
+                        } p-2 rounded-full`}
+                      >
+                        <ArrowRightOnRectangleIcon className="h-6" />
+                      </div>
+                      <p className="whitespace-nowrap font-semibold lg:text-base">
+                        Log Out
+                      </p>
+                    </div>
+                  )}
+                </Menu.Item>
+              </Menu.Items>
+            </Transition>
+          )}
+        </Menu>
       </div>
-      <div></div>
     </header>
   );
 };
