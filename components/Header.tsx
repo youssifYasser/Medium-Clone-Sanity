@@ -13,7 +13,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 bg-opacity-50 backdrop-blur-xl flex justify-between p-5 max-w-7xl mx-auto shadow-md">
+    <header className="sticky top-0 z-50 bg-opacity-50 backdrop-blur-xl flex justify-between p-5 max-w-7xl mx-auto shadow-md lg:shadow-none">
       <div className="flex flex-1  items-center space-x-5">
         <Link href="/">
           <img
@@ -62,7 +62,7 @@ const Header = () => {
                     width="40"
                     height="40"
                     src={session.user.image}
-                    className="rounded-full"
+                    className="rounded-full object-cover"
                   />
                   <ChevronDownIcon className="hidden sm:inline-flex w-4 text-black" />
                 </div>
