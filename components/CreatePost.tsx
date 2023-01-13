@@ -1,11 +1,14 @@
 import { Author } from '../typings';
+import Image from 'next/image';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import PortableText from 'react-portable-text';
+import { useSession } from 'next-auth/react';
+import { urlFor } from '../sanity';
+import { UserIcon } from '@heroicons/react/24/outline';
 
 interface Props {
-  authors: Author[];
+  author: Author;
 }
 
 interface PostForm {
@@ -17,7 +20,8 @@ interface PostForm {
   postImage: string;
 }
 
-const CreatePost = ({ authors }: Props) => {
+const CreatePost = ({ author }: Props) => {
+  const { data: session } = useSession();
   const router = useRouter();
   const [submitted, setSubmitted] = useState(false);
   const {
@@ -73,6 +77,7 @@ const CreatePost = ({ authors }: Props) => {
       if (imageData.secure_url) {
         data = {
           ...data,
+          authorId: author._id,
           tempSlug: data.title.toLowerCase().replaceAll(' ', '-'),
           postImage: imageData.secure_url,
         };
@@ -134,7 +139,7 @@ const CreatePost = ({ authors }: Props) => {
               <div className="flex-col shadow-lg h-44 w-full rounded">
                 <div className="flex flex-col h-full justify-center items-center">
                   <p className="text-lg font-semibold m-10">
-                    Click to upload your Profile Picture
+                    Click to upload your Post Picture
                   </p>
                 </div>
                 <input
@@ -170,20 +175,32 @@ const CreatePost = ({ authors }: Props) => {
 
           <label className="block mb-5">
             <span className="text-gray-700">Author</span>
-            <select
-              {...register('authorId', { required: true })}
-              className="block w-full border shadow py-2 px-3 mt-1 rounded form-select outline-none ring-yellow-500 focus:ring-1 capitalize"
-              defaultValue=""
-            >
-              <option disabled selected value="">
-                -- Select Author --
-              </option>
-              {authors.map((author) => (
-                <option key={author._id} value={author._id}>
-                  {author.name}
-                </option>
-              ))}
-            </select>
+            <div className="flex items-center space-x-2 w-full border shadow py-2 px-3 mt-1 rounded capitalize">
+              {session ? (
+                <>
+                  <Image
+                    src={
+                      author.image
+                        ? urlFor(author.image).url()
+                        : author.profileImage
+                    }
+                    width="40"
+                    height="40"
+                    alt="author pic"
+                    objectFit="cover"
+                    className="rounded-full"
+                  />
+                  <p className="font-medium">{author.name}</p>
+                </>
+              ) : (
+                <>
+                  <div className="bg-gray-300 text-gray-900 p-2 rounded-full">
+                    <UserIcon className="h-6" />
+                  </div>
+                  <p>-- Sign in and become an Author --</p>
+                </>
+              )}
+            </div>
           </label>
 
           <label className="block mb-5">
@@ -217,9 +234,7 @@ const CreatePost = ({ authors }: Props) => {
                 - The Description Field is required
               </span>
             )}
-            {errors.authorId && (
-              <span className="text-red-500">- Select the Author of Post</span>
-            )}
+
             {errors.postBody && (
               <span className="text-red-500">- The Post Field is required</span>
             )}
