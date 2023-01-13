@@ -140,7 +140,7 @@ const CreatePost = ({ author }: Props) => {
               <div className="flex-col shadow-md h-44 w-full rounded">
                 <div className="flex flex-col h-full justify-center items-center">
                   <p className="text-lg font-semibold m-10">
-                    Click to upload your Post Picture
+                    Click To Upload Your Post Picture
                   </p>
                 </div>
                 <input
@@ -176,7 +176,7 @@ const CreatePost = ({ author }: Props) => {
 
           <label className="block mb-5">
             <span className="text-gray-700">Author</span>
-            <div className="flex items-center space-x-2 w-full border shadow py-2 px-3 mt-1 rounded capitalize">
+            <div className="flex items-center space-x-4 w-full border shadow py-2 px-3 mt-1 rounded capitalize">
               {session ? (
                 <>
                   <img
