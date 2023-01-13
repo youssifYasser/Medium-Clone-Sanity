@@ -44,7 +44,7 @@ const SignIn = ({ providers }: Props) => {
               onClick={() => {
                 signIn(provider.id);
               }}
-              className="flex space-x-5 items-center py-3 px-10 cursor-pointer border-2 border-orange-700 rounded-lg text-orange-700 hover:text-orange-600 hover:border-orange-600  active:bg-orange-600 active:text-white transition-colors duration-200 ease-in-out"
+              className="flex space-x-5 items-center py-3 px-10 cursor-pointer border-2 border-green-600 rounded-lg text-green-600 hover:text-green-500 hover:border-green-500  active:bg-green-700 active:text-white transition-colors duration-200 ease-in-out"
             >
               <Image
                 alt="google logo"
