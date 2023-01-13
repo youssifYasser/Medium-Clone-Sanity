@@ -103,9 +103,6 @@ const CreatePost = ({ author }: Props) => {
     setIsLoading(false);
   };
 
-  if (typeof window !== 'undefined') {
-    router.replace('/');
-  }
 
   return (
     <>
