@@ -137,7 +137,7 @@ const CreatePost = ({ author }: Props) => {
             </div>
           ) : (
             <label className="cursor-pointer mb-5 self-center w-full">
-              <div className="flex-col shadow-lg h-44 w-full rounded">
+              <div className="flex-col shadow-md h-44 w-full rounded">
                 <div className="flex flex-col h-full justify-center items-center">
                   <p className="text-lg font-semibold m-10">
                     Click to upload your Post Picture
@@ -179,16 +179,14 @@ const CreatePost = ({ author }: Props) => {
             <div className="flex items-center space-x-2 w-full border shadow py-2 px-3 mt-1 rounded capitalize">
               {session ? (
                 <>
-                  <Image
+                  <img
                     src={
                       author.image
                         ? urlFor(author.image).url()
                         : author.profileImage
                     }
-                    width={40}
-                    height={40}
                     alt="author pic"
-                    className="rounded-full object-cover"
+                    className="rounded-full object-cover h-11 w-11"
                   />
                   <p className="font-medium">{author.name}</p>
                 </>
