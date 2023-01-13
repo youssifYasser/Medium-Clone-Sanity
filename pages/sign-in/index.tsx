@@ -37,7 +37,11 @@ export const getServerSideProps = async (context: any) => {
       const data = {
         ...session.user,
         tempSlug:
-          session.user.name.toLowerCase().replaceAll(' ', '-') +
+          session.user.email
+            .toLowerCase()
+            .replaceAll('@', '-')
+            .replaceAll('.', '-')
+            .replaceAll('_', '-') +
           '-' +
           Math.random().toString().slice(2),
       };

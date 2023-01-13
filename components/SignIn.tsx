@@ -1,9 +1,6 @@
 import { Provider } from '../typings';
-import Head from 'next/head';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 interface SignUpForm {
   name: string;
@@ -18,16 +15,11 @@ interface Props {
 }
 
 const SignIn = ({ providers }: Props) => {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (session) {
-      router.replace({
-        pathname: '/',
-      });
-    }
-  }, [session]);
+  // if (session) {
+  //   router.replace({
+  //     pathname: '/',
+  //   });
+  // }
   return (
     <div className="grid place-items-center my-20 space-y-10">
       <h1 className="font-bold text-4xl">Log in to Medium</h1>

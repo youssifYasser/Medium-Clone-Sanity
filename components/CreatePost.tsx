@@ -1,7 +1,7 @@
 import { Author } from '../typings';
 import Image from 'next/image';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useRouter } from 'next/router';
+import { Router, useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { urlFor } from '../sanity';
@@ -102,6 +102,10 @@ const CreatePost = ({ author }: Props) => {
     }
     setIsLoading(false);
   };
+
+  if (typeof window !== 'undefined') {
+    router.replace('/');
+  }
 
   return (
     <>
