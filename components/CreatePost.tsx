@@ -185,11 +185,10 @@ const CreatePost = ({ author }: Props) => {
                         ? urlFor(author.image).url()
                         : author.profileImage
                     }
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     alt="author pic"
-                    objectFit="cover"
-                    className="rounded-full"
+                    className="rounded-full object-cover"
                   />
                   <p className="font-medium">{author.name}</p>
                 </>
