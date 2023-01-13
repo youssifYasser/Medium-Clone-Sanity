@@ -3,13 +3,22 @@ import SignIn from '../../components/SignIn';
 import { getProviders, getSession } from 'next-auth/react';
 import { Provider } from '../../typings';
 import { client } from '../../sanity';
+import Head from 'next/head';
 
 interface Props {
   providers: [Provider];
 }
 
 const signInPage = ({ providers }: Props) => {
-  return <SignIn providers={providers} />;
+  return (
+    <>
+      <Head>
+        <title>Login - Medium</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <SignIn providers={providers} />;
+    </>
+  );
 };
 
 export const getServerSideProps = async (context: any) => {
