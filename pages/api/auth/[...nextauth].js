@@ -1,6 +1,5 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { useRouter } from 'next/router';
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -12,17 +11,15 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
-    session({ session, token, user }) {
+    session({ session }) {
       return session; // The return type will match the one returned in `useSession()`
+    },
+    async redirect() {
+      return '/';
     },
   },
   pages: {
     signIn: '/sign-in',
-  },
-  callbacks: {
-    async redirect() {
-      return '/';
-    },
   },
 };
 
