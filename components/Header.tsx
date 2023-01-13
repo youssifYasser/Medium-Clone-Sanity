@@ -1,10 +1,11 @@
 import Link from 'next/link';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import Image from 'next/image';
 import {
   ArrowRightOnRectangleIcon,
+  ChevronDownIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
 
@@ -12,7 +13,7 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <header className="flex justify-between p-5 max-w-7xl mx-auto">
+    <header className="sticky top-0 z-50 bg-opacity-50 backdrop-blur-xl flex justify-between p-5 max-w-7xl mx-auto shadow-md">
       <div className="flex flex-1  items-center space-x-5">
         <Link href="/">
           <img
@@ -33,13 +34,13 @@ const Header = () => {
       <div className="flex flex-1 justify-end items-center space-x-2 sm:space-x-5 text-green-600">
         {session ? (
           <Link href="/create-post">
-            <h3 className="ext-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+            <h3 className="text-center bg-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
               Create Post
             </h3>
           </Link>
         ) : (
           <Link href="/sign-in">
-            <h3 className="text-center border-2 border-green-600 active:border-green-700 active:text-green-700 rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+            <h3 className="text-center bg-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
               Sign in
             </h3>
           </Link>
@@ -55,13 +56,16 @@ const Header = () => {
               }`}
             >
               {session?.user ? (
-                <Image
-                  alt="profile-pic"
-                  width="40"
-                  height="40"
-                  src={session.user.image}
-                  className="rounded-full"
-                />
+                <div className="flex items-center space-x-1">
+                  <Image
+                    alt="profile-pic"
+                    width="40"
+                    height="40"
+                    src={session.user.image}
+                    className="rounded-full"
+                  />
+                  <ChevronDownIcon className="hidden sm:inline-flex w-4 text-black" />
+                </div>
               ) : (
                 <div className="bg-gray-300 text-gray-900 p-2 rounded-full">
                   <UserIcon className="h-6" />
