@@ -109,7 +109,7 @@ const CreatePost = ({ author }: Props) => {
       {submitted ? (
         <div className="flex flex-col justify-center bg-yellow-500 max-w-2xl  mx-auto py-10 px-5 my-10  space-y-3 text-white">
           <h3 className="text-3xl font-bold">
-            Thank you for Sharing your Thoughts!
+            Thank You For Sharing Your Thoughts!
           </h3>
         </div>
       ) : (
@@ -117,7 +117,7 @@ const CreatePost = ({ author }: Props) => {
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col px-5 py-10 max-w-2xl mx-auto my-10 shadow shadow-yellow-500 hover:shadow-md hover:shadow-yellow-500  transition-shadow duration-200 ease-in-out"
         >
-          <h4 className="text-3xl font-bold">Share your Thoughts!</h4>
+          <h4 className="text-3xl font-bold">Share Your Thoughts!</h4>
           <hr className="py-3 mt-2" />
 
           {imagesAssets ? (
@@ -136,7 +136,7 @@ const CreatePost = ({ author }: Props) => {
               </button>
             </div>
           ) : (
-            <label className="cursor-pointer mb-5 self-center">
+            <label className="cursor-pointer mb-5 self-center w-full">
               <div className="flex-col shadow-lg h-44 w-full rounded">
                 <div className="flex flex-col h-full justify-center items-center">
                   <p className="text-lg font-semibold m-10">
