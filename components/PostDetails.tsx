@@ -51,7 +51,7 @@ const PostDetails = ({ post }: Props) => {
             : 'https://dummyimage.com/600x400/000/fff'
         }
         alt="post thumbnail"
-        className="h-44 w-full object-cover"
+        className="h-80 w-full object-cover"
       />
       <article className="max-w-3xl mx-auto p-5">
         <h1 className="text-3xl font-semibold mt-10 mb-3">{post.title}</h1>
