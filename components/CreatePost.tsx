@@ -254,7 +254,13 @@ const CreatePost = ({ author }: Props) => {
           <input
             type="submit"
             value={`${isLoading ? 'Loading...' : 'Share Post'}`}
-            className="bg-yellow-500 text-white font-bold w-full mx-auto py-2 px-3 rounded cursor-pointer hover:bg-yellow-400 focus:shadow  focus:outline-none transition-colors duration-200 ease-in-out"
+            className={` tracking-[3px]
+            bg-yellow-500 text-white font-bold w-full mx-auto py-2 px-3 rounded   focus:shadow  focus:outline-none transition-colors duration-200 ease-in-out ${
+              isLoading
+                ? 'cursor-default'
+                : 'cursor-pointer hover:bg-yellow-400'
+            }`}
+            disabled={isLoading}
           />
         </form>
       )}
