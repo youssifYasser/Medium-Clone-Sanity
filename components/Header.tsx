@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import {
   ArrowRightOnRectangleIcon,
@@ -26,7 +26,7 @@ const Header = () => {
           <div className="hidden md:inline-flex space-x-5 items-center">
             <h3 className="cursor-pointer">About</h3>
             <h3 className="cursor-pointer">Contact</h3>
-            <h3 className="bg-green-600 text-white px-4 py-1 rounded-full cursor-pointer">
+            <h3 className="border-2 border-green-600 text-green-600 px-4 py-1 rounded-full cursor-pointer">
               Follow
             </h3>
           </div>
@@ -35,13 +35,13 @@ const Header = () => {
         <div className="flex flex-1 justify-end items-center space-x-2 sm:space-x-5 text-green-600">
           {session ? (
             <Link href="/create-post">
-              <h3 className="text-center bg-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+              <h3 className="text-center bg-green-600 border-2 border-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
                 Create Post
               </h3>
             </Link>
           ) : (
             <Link href="/sign-in">
-              <h3 className="text-center bg-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
+              <h3 className="text-center bg-green-600 border-2 border-green-600 text-white active:bg-green-700  rounded-full px-5 py-1 cursor-pointer whitespace-nowrap font-semibold">
                 Sign in
               </h3>
             </Link>
@@ -50,10 +50,8 @@ const Header = () => {
           <Menu as="div" className="relative inline-block text-left">
             <div>
               <Menu.Button
-                className={`flex rounded-full ${
-                  session
-                    ? 'cursor-pointer active:scale-95 filter active:brightness-75 transition-all duration-150'
-                    : 'cursor-default'
+                className={`flex rounded-full group ${
+                  session ? 'cursor-pointer' : 'cursor-default'
                 }`}
               >
                 {session?.user ? (
@@ -63,9 +61,9 @@ const Header = () => {
                       width="40"
                       height="40"
                       src={session.user.image}
-                      className="rounded-full object-cover"
+                      className="rounded-full object-cover group-active:scale-95 filter group-active:brightness-75 transition-all duration-150"
                     />
-                    <ChevronDownIcon className="hidden sm:inline-flex w-4 text-black" />
+                    <ChevronDownIcon className="hidden sm:inline-flex w-4 text-black ui-open:rotate-180 ui-not-open:rotate-0 transition-transform duration-150" />
                   </div>
                 ) : (
                   <div className="bg-gray-300 text-gray-900 p-2 rounded-full">
