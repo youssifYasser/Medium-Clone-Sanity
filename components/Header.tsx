@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import Image from 'next/image';
+import mediumLogo from '../public/medium_logo.png';
 import {
   ArrowRightOnRectangleIcon,
   ChevronDownIcon,
@@ -13,15 +14,17 @@ const Header = () => {
   const { data: session } = useSession();
 
   return (
-    <header className="sticky top-0 z-50 bg-white w-full p-5 shadow-md ">
+    <header className="sticky top-0 z-50  w-full p-5 bg-gray-300 bg-opacity-50 backdrop-blur backdrop-filter shadow-md">
       <div className="max-w-7xl flex justify-between mx-auto">
         <div className="flex flex-1  items-center space-x-5">
           <Link href="/">
-            <img
-              src="/medium_logo.png"
-              alt="medium logo"
-              className=" w-40 sm:w-44 object-contain cursor-pointer"
-            />
+            <div className="relative w-40 sm:w-44 cursor-pointer">
+              <Image
+                src={mediumLogo}
+                alt="medium logo"
+                className="object-contain"
+              />
+            </div>
           </Link>
           <div className="hidden md:inline-flex space-x-5 items-center">
             <h3 className="cursor-pointer">About</h3>
@@ -56,13 +59,14 @@ const Header = () => {
               >
                 {session?.user ? (
                   <div className="flex items-center space-x-1">
-                    <Image
-                      alt="profile-pic"
-                      width="40"
-                      height="40"
-                      src={session.user.image}
-                      className="rounded-full object-cover group-active:scale-95 filter group-active:brightness-75 transition-all duration-150"
-                    />
+                    <div className="relative h-11 w-11 group-active:scale-95 filter group-active:brightness-75 transition-all duration-150">
+                      <Image
+                        alt="profile-pic"
+                        fill
+                        src={session.user.image}
+                        className="rounded-full object-cover"
+                      />
+                    </div>
                     <ChevronDownIcon className="hidden sm:inline-flex w-4 text-black ui-open:rotate-180 ui-not-open:rotate-0 transition-transform duration-150" />
                   </div>
                 ) : (

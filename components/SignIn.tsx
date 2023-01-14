@@ -15,11 +15,6 @@ interface Props {
 }
 
 const SignIn = ({ providers }: Props) => {
-  // if (session) {
-  //   router.replace({
-  //     pathname: '/',
-  //   });
-  // }
   return (
     <div className="grid place-items-center my-20 space-y-10">
       <h1 className="font-bold text-4xl">Log in to Medium</h1>

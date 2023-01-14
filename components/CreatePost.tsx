@@ -78,7 +78,15 @@ const CreatePost = ({ author }: Props) => {
         data = {
           ...data,
           authorId: author._id,
-          tempSlug: data.title.toLowerCase().replaceAll(' ', '-'),
+          tempSlug:
+            data.title
+              .toLowerCase()
+              .replaceAll(' ', '-')
+              .replaceAll('@', '-')
+              .replaceAll('.', '-')
+              .replaceAll('_', '-') +
+            '-' +
+            Math.random().toString().slice(2),
           postImage: imageData.secure_url,
         };
 
@@ -103,7 +111,6 @@ const CreatePost = ({ author }: Props) => {
     setIsLoading(false);
   };
 
-
   return (
     <>
       {submitted ? (
@@ -122,11 +129,14 @@ const CreatePost = ({ author }: Props) => {
 
           {imagesAssets ? (
             <div className="flex justify-center space-x-3 items-center h-44 w-full mb-10">
-              <img
-                src={imagesAssets}
-                alt="uploaded_image"
-                className="h-full w-full object-cover  border shadow"
-              />
+              <div className="relative h-full w-full border shadow">
+                <Image
+                  fill
+                  src={imagesAssets}
+                  alt="uploaded_image"
+                  className=" object-cover "
+                />
+              </div>
               <button
                 type="button"
                 className="rounded-full h-fit py-2 px-4  text-red-700 font-bold text-xl cursor-pointer outline-none hover:bg-red-700 hover:text-white  transition-all duration-200 ease-in-out"
@@ -179,15 +189,18 @@ const CreatePost = ({ author }: Props) => {
             <div className="flex items-center space-x-4 w-full border shadow py-2 px-3 mt-1 rounded capitalize">
               {session ? (
                 <>
-                  <img
-                    src={
-                      author.image
-                        ? urlFor(author.image).url()
-                        : author.profileImage
-                    }
-                    alt="author pic"
-                    className="rounded-full object-cover h-11 w-11"
-                  />
+                  <div className="relative h-11 w-11">
+                    <Image
+                      fill
+                      src={
+                        author.image
+                          ? urlFor(author.image).url()
+                          : author.profileImage
+                      }
+                      alt="author pic"
+                      className="rounded-full object-cover"
+                    />
+                  </div>
                   <p className="font-medium">{author.name}</p>
                 </>
               ) : (

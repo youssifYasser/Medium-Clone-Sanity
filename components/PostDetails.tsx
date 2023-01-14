@@ -2,6 +2,7 @@ import { urlFor } from '../sanity';
 import { Post } from '../typings';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 interface FormInput {
   _id: string;
@@ -42,17 +43,14 @@ const PostDetails = ({ post }: Props) => {
 
   return (
     <main>
-      <img
-        src={
-          post.mainImage
-            ? urlFor(post.mainImage).url()
-            : post.postImage
-            ? post.postImage
-            : 'https://dummyimage.com/600x400/000/fff'
-        }
-        alt="post thumbnail"
-        className="h-80 w-full object-cover"
-      />
+      <div className="relative h-80 w-full">
+        <Image
+          fill
+          src={post.mainImage ? urlFor(post.mainImage).url() : post.postImage}
+          alt="post thumbnail"
+          className="object-cover"
+        />
+      </div>
       <article className="max-w-3xl mx-auto p-5">
         <h1 className="text-3xl font-semibold mt-10 mb-3">{post.title}</h1>
         <h2 className="text-xl font-light text-gray-700 mb-3">
@@ -60,17 +58,18 @@ const PostDetails = ({ post }: Props) => {
         </h2>
 
         <div className="flex items-center gap-2">
-          <img
-            src={
-              post.author.image
-                ? urlFor(post.author.image).url()
-                : post.author.profileImage
-                ? post.author.profileImage
-                : 'https://dummyimage.com/600x400/000/fff'
-            }
-            alt="author profile picture"
-            className="h-10 w-10 rounded-full object-cover"
-          />
+          <div className="relative h-10 w-10">
+            <Image
+              fill
+              src={
+                post.author.image
+                  ? urlFor(post.author.image).url()
+                  : post.author.profileImage
+              }
+              alt="author profile picture"
+              className=" rounded-full object-cover"
+            />
+          </div>
           <p className="text-sm font-extralight">
             Blog Post By <span className="font-bold">{post.author.name}</span> -
             Published At {creationDate}

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Post } from '../typings';
 import { urlFor } from '../sanity';
+import Image from 'next/image';
 
 interface Props {
   post: Post;
@@ -10,17 +11,14 @@ const PostContainer = ({ post }: Props) => {
   return (
     <Link href={`/post/${post.slug.current}`} key={post._id}>
       <div className="border rounded-lg group cursor-pointer overflow-hidden">
-        <img
-          src={
-            post.mainImage
-              ? urlFor(post.mainImage).url()
-              : post.postImage
-              ? post.postImage
-              : 'https://dummyimage.com/600x400/000/fff'
-          }
-          alt="post thumbnail"
-          className="h-60 object-cover w-full group-hover:scale-105 transition-transform duration-200 ease-in-out"
-        />
+        <div className="relative h-60 w-full group-hover:scale-105 transition-transform duration-200 ease-in-out">
+          <Image
+            fill
+            src={post.mainImage ? urlFor(post.mainImage).url() : post.postImage}
+            alt="post thumbnail"
+            className="object-cover "
+          />
+        </div>
 
         <div className="flex justify-between items-center bg-white p-2 gap-2">
           <div>
@@ -31,17 +29,18 @@ const PostContainer = ({ post }: Props) => {
               <span className="font-bold">{post.author.name}</span>
             </p>
           </div>
-          <img
-            src={
-              post.author.image
-                ? urlFor(post.author.image).url()
-                : post.author.profileImage
-                ? post.author.profileImage
-                : 'https://dummyimage.com/600x400/000/fff'
-            }
-            alt="author profile picture"
-            className="h-12 w-12 rounded-full object-cover"
-          />
+          <div className="relative h-11 w-11">
+            <Image
+              fill
+              src={
+                post.author.image
+                  ? urlFor(post.author.image).url()
+                  : post.author.profileImage
+              }
+              alt="author profile picture"
+              className="rounded-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </Link>
