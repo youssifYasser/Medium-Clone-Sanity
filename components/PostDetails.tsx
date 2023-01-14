@@ -53,7 +53,7 @@ const PostDetails = ({ post }: Props) => {
       </div>
       <article className="max-w-3xl mx-auto p-5">
         <h1 className="text-3xl font-semibold mt-10 mb-3">{post.title}</h1>
-        <h2 className="text-xl font-light text-gray-700 mb-3">
+        <h2 className="text-lg font-light text-gray-700 mb-3">
           {post.description}
         </h2>
 
@@ -77,7 +77,7 @@ const PostDetails = ({ post }: Props) => {
         </div>
 
         <div className="mt-10">
-          <p className="whitespace-pre-line">{post.body}</p>
+          <p className="whitespace-pre-line text-xl">{post.body}</p>
         </div>
       </article>
 
