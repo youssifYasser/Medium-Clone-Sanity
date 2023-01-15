@@ -86,7 +86,7 @@ const PostDetails = ({ post }: Props) => {
       <hr className="max-w-xl my-5 mx-auto border border-yellow-500" />
 
       {session && (
-        <div>
+        <>
           {submitted ? (
             <div className="flex flex-col justify-center bg-yellow-500 max-w-2xl mx-auto py-10 px-5  my-10 text-white">
               <h3 className="text-3xl font-bold">
@@ -147,7 +147,7 @@ const PostDetails = ({ post }: Props) => {
               />
             </form>
           )}
-        </div>
+        </>
       )}
 
       {/* Comments */}
