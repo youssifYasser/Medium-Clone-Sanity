@@ -89,8 +89,8 @@ const PostDetails = ({ post }: Props) => {
         <>
           {submitted ? (
             <div className="flex flex-col justify-center bg-yellow-500 max-w-2xl mx-auto py-10 px-5  my-10 text-white">
-              <h3 className="text-3xl font-bold">
-                Thank you for submitting your Comment!
+              <h3 className="text-2xl sm:text-3xl font-bold">
+                Thank you for your Comment!
               </h3>
               <p>Once it has been approved, it will appear below</p>
             </div>
@@ -100,7 +100,9 @@ const PostDetails = ({ post }: Props) => {
               className="flex flex-col p-5 max-w-2xl mx-auto mb-10"
             >
               <h3 className="text-yellow-500 text-sm">Enjoyed this article?</h3>
-              <h4 className="text-3xl font-bold">Leave a comment below!</h4>
+              <h4 className="text-2xl sm:text-3xl font-bold">
+                Leave a comment below!
+              </h4>
               <hr className="py-3 mt-2" />
 
               <input
@@ -152,7 +154,7 @@ const PostDetails = ({ post }: Props) => {
 
       {/* Comments */}
       <div className="flex flex-col space-y-2 shadow shadow-yellow-400 p-10 max-w-2xl mx-auto my-10">
-        <h3 className="text-4xl font-semibold">Comments</h3>
+        <h3 className="text-3xl sm:text-4xl font-semibold">Comments</h3>
         <hr className="pb-2" />
         {post.comments.map((comment) => (
           <div key={comment._id}>
