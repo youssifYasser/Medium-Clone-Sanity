@@ -60,7 +60,7 @@ const PostDetails = ({ post }: Props) => {
         </h2>
 
         <div className="flex items-center gap-2">
-          <div className="relative h-10 w-10">
+          <div className="relative min-w-[40px] min-h-[40px] sm:h-11 sm:w-11 ">
             <Image
               fill
               src={
