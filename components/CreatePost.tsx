@@ -1,7 +1,7 @@
 import { Author } from '../typings';
 import Image from 'next/image';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { urlFor } from '../sanity';

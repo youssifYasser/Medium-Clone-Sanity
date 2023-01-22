@@ -18,7 +18,7 @@ const Header = () => {
       <div className="max-w-7xl flex justify-between mx-auto">
         <div className="flex flex-1  items-center space-x-5">
           <Link href="/">
-            <div className="relative w-40 sm:w-44 cursor-pointer">
+            <div className="w-40 sm:w-44 cursor-pointer">
               <Image
                 src={mediumLogo}
                 alt="medium logo"
