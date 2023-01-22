@@ -1,3 +1,4 @@
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import Banner from '../components/Banner';
 import Posts from '../components/Posts';
@@ -22,7 +23,7 @@ const Home = (props: Props) => {
   );
 };
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: any) => {
   const query = `*[_type=="post"]{
   _id,
   title,
@@ -38,6 +39,45 @@ export const getServerSideProps = async () => {
 }`;
 
   const posts = await client.fetch(query);
+
+  const session = await getSession(context);
+
+  if (session) {
+    const query = `*[_type=="author" && email == $email]{
+    _id,
+    name,
+    email,
+  }`;
+
+    const author = (
+      await client.fetch(query, { email: session?.user.email })
+    )[0];
+
+    if (!author) {
+      const data = {
+        ...session.user,
+        tempSlug:
+          session.user.email
+            .toLowerCase()
+            .replaceAll('@', '-')
+            .replaceAll('.', '-')
+            .replaceAll('_', '-') +
+          '-' +
+          Math.random().toString().slice(2),
+      };
+
+      await client.create({
+        _type: 'author',
+        name: data.name,
+        email: data.email,
+        slug: {
+          _type: 'slug',
+          current: data.tempSlug,
+        },
+        profileImage: data.image,
+      });
+    }
+  }
 
   return {
     props: {
